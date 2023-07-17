@@ -10,19 +10,21 @@ class loginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<loginScreen> {
+  final formKey = GlobalKey<FormState>();
   Widget build(context) {
     return Container(
         margin: EdgeInsets.all(20.0),
         child: Form(
+            key: formKey,
             child: Column(
-          children: [
-            emailField(),
-            const SizedBox(height: 10),
-            passwordField(),
-            const SizedBox(height: 10),
-            submitButton()
-          ],
-        )));
+              children: [
+                emailField(),
+                const SizedBox(height: 10),
+                passwordField(),
+                const SizedBox(height: 10),
+                submitButton()
+              ],
+            )));
   }
 
   Widget emailField() {
@@ -54,7 +56,9 @@ class LoginScreenState extends State<loginScreen> {
               RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(9.0),
       ))),
-      onPressed: () {},
+      onPressed: () {
+        formKey.currentState?.reset();
+      },
       child: const Text('Login'),
     );
   }
