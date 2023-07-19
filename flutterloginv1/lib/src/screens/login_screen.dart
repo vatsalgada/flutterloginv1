@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class loginScreen extends StatefulWidget {
@@ -35,6 +33,13 @@ class LoginScreenState extends State<loginScreen> {
         hintText: "you@example.com",
       ),
       keyboardType: TextInputType.emailAddress,
+      validator: (value) {
+        if (value != null) {
+          if (!value.contains('@')) {
+            return 'Please enter a valid email';
+          }
+        }
+      },
     );
   }
 
@@ -46,6 +51,13 @@ class LoginScreenState extends State<loginScreen> {
         hintText: "Password",
       ),
       obscureText: true,
+      validator: (value) {
+        if (value != null) {
+          if (value.length < 4) {
+            return 'Password must be atleast 5 characters long';
+          }
+        }
+      },
     );
   }
 
@@ -57,7 +69,7 @@ class LoginScreenState extends State<loginScreen> {
         borderRadius: BorderRadius.circular(9.0),
       ))),
       onPressed: () {
-        formKey.currentState?.reset();
+        print(formKey.currentState?.validate());
       },
       child: const Text('Login'),
     );
